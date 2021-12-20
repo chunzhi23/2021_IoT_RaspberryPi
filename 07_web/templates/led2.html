@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED Administrator</title>
+    <script>
+        function led_op(hex, op){
+            let url;
+            // let url = (op == 1) ? "/led/on" : "/led/off";
+            if (hex == 'red'){
+                url = (op == 1) ? "led/red/on" : "led/red/off";
+            }
+            else if (hex == 'yel'){
+                url = (op == 1) ? "led/yellow/on" : "led/yellow/off";
+            }
+
+            fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                let result = document.querySelector("#res");
+                result.innerHTML = "<h3>" + data + "</h3>";
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>LED ON/OFF</h2>
+    <button onclick="led_op('red', 1)">RED LED ON</button>
+    <button onclick="led_op('red', 0)">RED LED OFF</button>
+    <button onclick="led_op('yel', 1)">YELLOW LED ON</button>
+    <button onclick="led_op('yel', 0)">YELLOW LED OFF</button>
+    <div id="res"></div>
+</body>
+</html>
